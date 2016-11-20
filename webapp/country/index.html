@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christmas Songs - Country</title>
+<link rel="stylesheet" href="../files/main.css">
+    <script src="https://code.jquery.com/jquery-1.4.2.min.js"  crossorigin="anonymous"></script>
+</head>
+<body style="background-image: url(http://unsplash.com/photos/pc00EDmxodI/download);">
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+	
+    
+    <div id="page">
+        <nav id="nav"><span id="title">Christmas Songs</span></nav>
+        <div class="container">
+            <div id="card" onclick="" style="background-image: url(/files/logo1.png);"></div>
+
+        </div>
+        
+        
+    </div>
+    
+    <audio id="music" preload="true" autoplay>
+  <source src="http://192.99.62.212:9204/;stream/1">
+	</audio>
+<div id="audioplayer">
+	<button id="pButton" class="pause" onclick="play()"></button>
+<div id="nowplaying">Loading</div>
+</div>
+
+    
+    <script>
+    var music = document.getElementById('music'); // id for audio element
+var duration; // Duration of audio clip
+var pButton = document.getElementById('pButton'); // play button
+
+var playhead = document.getElementById('playhead'); // playhead
+
+var timeline = document.getElementById('timeline'); // timeline
+// timeline width adjusted for playhead
+var timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+
+// timeupdate event listener
+music.addEventListener("timeupdate", timeUpdate, false);
+
+//Makes timeline clickable
+timeline.addEventListener("click", function (event) {
+	moveplayhead(event);
+	music.currentTime = duration * clickPercent(event);
+}, false);
+
+// returns click as decimal (.77) of the total timelineWidth
+function clickPercent(e) {
+	return (e.pageX - timeline.offsetLeft) / timelineWidth;
+}
+
+// Makes playhead draggable 
+playhead.addEventListener('mousedown', mouseDown, false);
+window.addEventListener('mouseup', mouseUp, false);
+
+// Boolean value so that mouse is moved on mouseUp only when the playhead is released 
+var onplayhead = false;
+// mouseDown EventListener
+function mouseDown() {
+	onplayhead = true;
+	window.addEventListener('mousemove', moveplayhead, true);
+	music.removeEventListener('timeupdate', timeUpdate, false);
+}
+// mouseUp EventListener
+// getting input from all mouse clicks
+function mouseUp(e) {
+	if (onplayhead == true) {
+		moveplayhead(e);
+		window.removeEventListener('mousemove', moveplayhead, true);
+		// change current time
+		music.currentTime = duration * clickPercent(e);
+		music.addEventListener('timeupdate', timeUpdate, false);
+	}
+	onplayhead = false;
+}
+// mousemove EventListener
+// Moves playhead as user drags
+function moveplayhead(e) {
+	var newMargLeft = e.pageX - timeline.offsetLeft;
+	if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
+		playhead.style.marginLeft = newMargLeft + "px";
+	}
+	if (newMargLeft < 0) {
+		playhead.style.marginLeft = "0px";
+	}
+	if (newMargLeft > timelineWidth) {
+		playhead.style.marginLeft = timelineWidth + "px";
+	}
+}
+
+// timeUpdate 
+// Synchronizes playhead position with current point in audio 
+function timeUpdate() {
+	var playPercent = timelineWidth * (music.currentTime / duration);
+	playhead.style.marginLeft = playPercent + "px";
+	if (music.currentTime == duration) {
+		pButton.className = "";
+		pButton.className = "play";
+	}
+}
+
+//Play and Pause
+function play() {
+	// start music
+	if (music.paused) {
+		music.play();
+		// remove play, add pause
+		pButton.className = "";
+		pButton.className = "pause";
+	} else { // pause music
+		music.pause();
+		// remove pause, add play
+		pButton.className = "";
+		pButton.className = "play";
+	}
+}
+
+// Gets audio file duration
+music.addEventListener("canplaythrough", function () {
+	duration = music.duration;  
+}, false);
+
+
+
+
+    </script>
+    <script>
+
+window.setInterval(function(){
+  /// call your function here
+
+// It is good specify the charset you expect.
+// You can use the charset you want instead of utf-8.
+// See details for scriptCharset and contentType options: 
+// http://api.jquery.com/jQuery.ajax/#jQuery-ajax-settings
+$.ajaxSetup({
+    scriptCharset: "utf-8", //or "ISO-8859-1"
+    contentType: "application/json; charset=utf-8"
+});
+
+$.getJSON('http://whateverorigin.org/get?url=' + 
+    encodeURIComponent('http://192.99.62.212:9204/currentsong') + '&callback=?',
+    function (data) {
+        console.log("> ", data);
+
+        //If the expected response is text/plain
+        $("#nowplaying").html(data.contents);
+
+        //If the expected response is JSON
+        //var response = $.parseJSON(data.contents);
+});
+    
+    }, 5000);
+</script>
+</body>
+</html>
+
+
+
+
+
+

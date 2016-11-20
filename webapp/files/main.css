@@ -1,0 +1,75 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(/files/OstrichSansInline-Regular.otf);
+}
+body {margin: 0px;}
+nav {
+    background-color: #27ae60;
+    height: 50px;
+}
+#title {
+    padding-left: 5px;
+    font-size: 30px;
+    color: white;
+    font-family: myFirstFont;
+}
+
+div#card {
+    width: 300px;
+    height: 300px;
+    display: inline-flex;
+    margin: 15px 15px 15px 15px;
+
+    position: relative;
+          -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.container {text-align: center;
+overflow: scroll;
+}
+
+body {margin:0;
+ overflow:hidden;
+              -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#audioplayer{
+	width: 100%;
+	height: 60px;
+    position: absolute;
+    bottom: 0px;
+    background-color: #27ae60;
+	
+}
+
+#pButton{
+    height:60px; 
+    width: 60px;
+    border: none;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    float:left;
+    outline:none;
+}
+
+.play{background: url('http://www.alexkatz.me/codepen/images/play.png') ;}
+.pause{background: url('http://www.alexkatz.me/codepen/images/pause.png') ;}
+
+#page {
+    height: 100vh;
+    width: 100%;
+    overflow: scroll;
+}
+
+#nowplaying {color: white;
+font-family: 'Source Sans Pro', sans-serif;
+    float: right;
+    padding: 18px;
+}
