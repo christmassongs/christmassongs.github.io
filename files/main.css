@@ -1,0 +1,24 @@
+body {font-family: 'Source Sans Pro', sans-serif;
+}
+@font-face {
+    font-family: myFirstFont;
+    src: url(/files/OstrichSansInline-Regular.otf);
+}
+#title {
+    padding-left:;
+    font-size: 60px;
+    color: black;
+    font-family: myFirstFont;
+    text-align: center;
+}
+
+#description {text-align: center;
+font-size: 20px;
+}
+.christmas-green {
+	color: #008000;
+}
+
+.christmas-red {
+	color: #D81E1E;
+}

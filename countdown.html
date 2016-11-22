@@ -1,0 +1,140 @@
+
+<!DOCTYPE html><html class=''>
+<head>
+
+
+<style class="cp-pen-styles">@import url('https://fonts.googleapis.com/css?family=Delius+Swash+Caps');
+html {
+    cursor: url(http://cur.cursors-4u.net/holidays/hol-4/hol350.cur), progress !important;
+}
+body {
+  background: #F72F4E;
+  background-image: url(http://i.imgur.com/AYZg4Ly.png), url(http://i.imgur.com/L3nLku5.png), url(http://i.imgur.com/Qfc1IDA.png);
+  text-align:center;
+  font-family: 'Delius Swash Caps', cursive;
+  animation: snow 13s infinite;
+  animation-timing-function:linear;
+}
+#clockdiv {
+  position: absolute;
+  width: 1000px;
+  width: 100%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 50px;
+}
+.inner {
+  display:inline-block;
+  border-radius: 0px;
+  background: repeating-linear-gradient(
+  45deg,
+  rgba(255,255,255,0.2),
+  rgba(255,255,255,0.2) 5px,
+  rgba(255,0,0,0.2) 5px,
+  rgba(255,0,0,0.2) 10px);
+  border: 5px solid rgba(255,255,255, 1);
+  color: #fff;
+  padding: 15px;
+  width: 80px;
+  height: 80px;
+  text-shadow: 1px 1px 10px #ff0b;
+}
+.small {
+  font-size: 15px;
+  font-weight: bold;
+}
+.headingup {
+  color: #fff;
+  display:inline-block;
+}
+.headingdown {
+  display:inline-block;
+  color: #fff;
+  font-size: 
+}
+
+
+@keyframes snow {
+ 0% {background-position: 0px 0px;}
+100% {background-position: 500px 1000px, 400px 400px, 300px 300px;}
+}
+
+@media (max-width:800px){
+  .headingup, .headindown {
+    display: block;
+  }
+}</style></head><body>
+<div id="clockdiv">
+  <div class="headingup">
+  Christmas is
+  </div>
+  <div class="clocks">
+  <div class="inner">
+  <span class="days"></span>
+    <div class="small">Days</div>
+  </div>
+  <div class="inner">
+    <span class="hours"></span>
+    <div class="small">Hours</div>
+  </div>
+  <div class="inner">
+  <span class="minutes"></span>
+    <div class="small">Minutes</div>
+  </div>
+  <div class="inner">
+  <span class="seconds"></span>
+    <div class="small">Seconds</div>
+  </div>
+  </div>
+  <div class="headingdown">
+   away
+  </div>
+
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script>/**TIMER FROM https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/*/
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+var deadline = '2016-12-24';
+initializeClock('clockdiv', deadline);
+</script>
+</body></html>
