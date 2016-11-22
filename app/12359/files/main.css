@@ -2,10 +2,31 @@
     font-family: myFirstFont;
     src: url(/files/OstrichSansInline-Regular.otf);
 }
-body {margin: 0px;}
+body {margin: 0px;
+height: 100vh;
+}
 nav {
     background-color: #27ae60;
     height: 50px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+#logoplaying {  
+    
+    width: 300px;
+    height: 300px;
+    display: inline-flex;
+
+    position: relative;
+          -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;}
+
+#page{
+    padding-top: 50px;
 }
 #title {
     padding-left: 5px;
@@ -14,26 +35,42 @@ nav {
     font-family: myFirstFont;
 }
 
-div#card {
-    width: 300px;
-    height: 300px;
-    display: inline-flex;
-    margin: 15px 15px 15px 15px;
-
+div#card {width: 100%;
+    height: 80px;
+    margin: 10px 10px 0px 0px;
     position: relative;
-          -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
+div#card .icon{width: 80px;
+    height: 80px;
+    background-size: 80px 80px;
+}
+div#card #title1 {
+    position: absolute;
+    top: 32px;
+    left: 90px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#note {position: absolute;
+    top: 32px;
+    right: 20px;
+}
 
 .container {text-align: center;
+overflow: scroll;
+    
+}
 
+#nowplaying{
+    float: right;
+    width: 80%;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-top: 17px;
 }
 
 body {margin:0;
- overflow:hidden;
               -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -61,15 +98,3 @@ body {margin:0;
 
 .play{background: url('http://www.alexkatz.me/codepen/images/play.png') ;}
 .pause{background: url('http://www.alexkatz.me/codepen/images/pause.png') ;}
-
-#page {
-    height: 100vh;
-    width: 100%;
-    overflow: scroll;
-}
-
-#nowplaying {color: white;
-font-family: 'Source Sans Pro', sans-serif;
-    float: right;
-    padding: 18px;
-}

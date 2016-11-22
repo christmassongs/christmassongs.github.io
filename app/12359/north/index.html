@@ -7,32 +7,33 @@
 <link rel="stylesheet" href="../files/main.css">
     <script src="https://code.jquery.com/jquery-1.4.2.min.js"  crossorigin="anonymous"></script>
 </head>
-<body onload="loadsong();" style="background-image: url(http://unsplash.com/photos/pRQ_G-un4xs/download);">
+<body onload="loadsong();play();" style="background-image: url(/photoshop/logo6.jpeg); no-repeat center center fixed;">
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 	
-    
+    <nav id="nav"><span id="title" onclick="history.go(-1);">Back</span></nav>
     <div id="page">
-        <nav id="nav"><span id="title">Christmas Songs</span></nav>
+        
         <div class="container">
-            <div id="card" onclick="" style="background-image: url(/files/index.html);"></div>
+            <br><br><br><br>
+            <div id="logoplaying" onclick="" style="background-image: url(/files/logo6.png);"></div>
 
         </div>
         
         
     </div>
     
-    <audio id="music" preload="true" autoplay>
-  <source src="http://206.190.136.140:6008/;stream/1">
+    <audio id="music" preload="true" >
+  <source src="http://206.190.136.140:7047/;stream/1">
 	</audio>
 <div id="audioplayer">
-	<button id="pButton" class="pause" onclick="play()"></button>
-<div id="nowplaying">Loading</div>
+	<button id="pButton" class="play" onclick="play()"></button>
+    <marquee id="nowplaying" behavior="scroll" direction="left">Loading</marquee>
 </div>
 
     
-        <script>
-    var music = document.getElementById('music'); // id for audio element
+    <script>
+var music = document.getElementById('music'); // id for audio element
 var duration; // Duration of audio clip
 var pButton = document.getElementById('pButton'); // play button
 //Play and Pause
@@ -51,20 +52,19 @@ function play() {
 		// remove pause, add play
 		pButton.className = "";
 		pButton.className = "play";
-	}
-}
+	}}
 // Gets audio file duration
 music.addEventListener("canplaythrough", function () {
 	duration = music.duration;  
 }, false);
         window.setInterval(function() {
   loadsong();
-            console.log("Song Name Load");
+console.log("Song Name Load");
 }, 5000);
     function loadsong(){
-        $.getJSON('http://allorigins.pw/get?url=http%3A//206.190.136.140%3A6008/currentsong&callback=?', function(data){
+        $.getJSON('http://allorigins.pw/get?url=http%3A//206.190.136.140%3A7047/currentsong&callback=?', function(data){
 	$('#nowplaying').html(data.contents);
-});};
-</script>
+});
+};    </script>
 </body>
 </html>

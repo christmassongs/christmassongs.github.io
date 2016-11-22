@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../files/main.css">
     <script src="https://code.jquery.com/jquery-1.4.2.min.js"  crossorigin="anonymous"></script>
 </head>
-<body style="background-image: url(http://unsplash.com/photos/OfTjvlqJ6ac/download);">
+<body onload="loadsong();" style="background-image: url(http://unsplash.com/photos/OfTjvlqJ6ac/download);">
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 	
@@ -110,7 +110,13 @@ function timeUpdate() {
 function play() {
 	// start music
 	if (music.paused) {
-		music.play();
+				
+
+    var audio = $("#music");      
+
+    audio[0].play();
+    audio[0].load();//suspends and restores all audio element
+
 		// remove play, add pause
 		pButton.className = "";
 		pButton.className = "pause";
@@ -133,31 +139,18 @@ music.addEventListener("canplaythrough", function () {
     </script>
     <script>
 
-window.setInterval(function(){
-  /// call your function here
+        window.setInterval(function() {
+  loadsong();
+            console.log("Song Name Load");
+}, 5000);
 
-// It is good specify the charset you expect.
-// You can use the charset you want instead of utf-8.
-// See details for scriptCharset and contentType options: 
-// http://api.jquery.com/jQuery.ajax/#jQuery-ajax-settings
-$.ajaxSetup({
-    scriptCharset: "utf-8", //or "ISO-8859-1"
-    contentType: "application/json; charset=utf-8"
-});
-
-$.getJSON('http://whateverorigin.org/get?url=' + 
-    encodeURIComponent('http://206.190.136.140:7047/currentsong') + '&callback=?',
-    function (data) {
-        console.log("> ", data);
-
-        //If the expected response is text/plain
-        $("#nowplaying").html(data.contents);
-
-        //If the expected response is JSON
-        //var response = $.parseJSON(data.contents);
-});
     
-    }, 5000);
+    function loadsong(){
+        $.getJSON('http://allorigins.pw/get?url=http%3A//206.190.136.140%3A7047/currentsong&callback=?', function(data){
+	$('#nowplaying').html(data.contents);
+});
+};
+  
 </script>
 </body>
 </html>
